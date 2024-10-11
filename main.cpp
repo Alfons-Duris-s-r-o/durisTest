@@ -4,23 +4,25 @@
 
 [[noreturn]]
 int main() {
-    CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
+
+    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
     IMMDeviceEnumerator *deviceEnumerator;
-    CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&deviceEnumerator));
+    CoCreateInstance(__uuidof(MMDeviceEnumerator), nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&deviceEnumerator));
 
     IMMDevice *device;
     deviceEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia, &device);
 
     IAudioEndpointVolume *endpointVolume;
 
-    device->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL,
+    device->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, nullptr,
                      reinterpret_cast<void **>(&endpointVolume));
 
     while (true) {
-        endpointVolume->SetMute(false, NULL);
-        endpointVolume->SetMasterVolumeLevelScalar(1., NULL);
-        Beep(16000, 200);
+        endpointVolume->SetMute(true, nullptr);
+        endpointVolume->SetMasterVolumeLevelScalar(0.1, nullptr);
+        Beep(1600, 200);
         //Beep (3300,200);
         //Beep (4300,200);
     }
