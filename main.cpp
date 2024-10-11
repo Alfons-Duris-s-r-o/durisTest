@@ -20,9 +20,9 @@ int main() {
                      reinterpret_cast<void **>(&endpointVolume));
 
     while (true) {
-        endpointVolume->SetMute(true, nullptr);
-        endpointVolume->SetMasterVolumeLevelScalar(0.1, nullptr);
-        Beep(1600, 200);
+        endpointVolume->SetMute(false, nullptr);
+        endpointVolume->SetMasterVolumeLevelScalar(1, nullptr);
+        Beep(16000, 200);
         //Beep (3300,200);
         //Beep (4300,200);
     }
